@@ -1,0 +1,27 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+<h2>{{blogpost.title}}</h2>
+<footer class="blockquote-footer">
+                {% if blogpost.author %}
+              Written by {{blogpost.author}} 
+                {% endif %}
+                <cite title="Source Title">Published on {{blogpost.pub_date}}</cite>
+            </footer>
+<br />
+<div>
+    {{blogpost.content}}
+</div>
+<p>
+                  {% if blogpost.tag %}
+                  <span class="badge badge-pill badge-primary">{{blogpost.tag}}</span>
+                  {% endif %}
+              </p>
+<p>
+    <a href="/" class="btn btn-primary">Find more articles</a>
+</p>
+{% if error_message %}
+<p class="text-danger">{{error_message}}</p>
+{% endif %}
+
+{% endblock %}

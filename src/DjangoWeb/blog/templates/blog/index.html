@@ -1,0 +1,41 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h2>Recent Posts</h2>
+<br/>
+
+{% if latest_post_list %}
+<div class="card-group">
+    {% for post in latest_post_list %}
+        <div class="card">
+          {#<img class="card-img-top" src=".../100px180/" alt="Card image cap">#}
+          <div class="card-body">
+            <h5 class="card-title"><a href="{% url 'blog:blogpostdetail' post.id %}">{{post.title}}</a></h5>
+            <p class="card-text">{{post.short_description}}</p>
+            <footer class="blockquote-footer">
+                {% if post.author %}
+              Written by {{post.author}} 
+                {% endif %}
+                <cite title="Source Title">Published on {{post.pub_date}}</cite>
+            </footer>
+              
+              <p>
+                  {% if post.tag %}
+                  <span class="badge badge-pill badge-secondary">{{post.tag}}</span>
+                  {% endif %}
+              </p>
+              
+            <a href="{% url 'blog:blogpostdetail' post.id %}" class="btn btn-primary btn-sm">Read More</a>
+          </div>
+        </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>No posts available.</p>
+<br />
+<p>You can add new posts using the Django administration interface.</p>
+<p><a href="/admin" class="btn btn-primary btn-large">Django Administration &raquo;</a></p>
+{% endif %}
+
+{% endblock %}

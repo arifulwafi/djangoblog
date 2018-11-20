@@ -1,0 +1,14 @@
+{% if user.is_authenticated %}
+<form class="form-inline my-2 my-lg-0" id="logoutForm" action="/logout" method="post" >
+    {% csrf_token %}
+    <span class="navbar-brand">Hello <a href="/admin">{{ user.username }}!</a></span>
+     <a class="btn btn-outline-success my-2 my-sm-0" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+</form>
+{% else %}
+
+<form class="form-inline my-2 my-lg-0">
+    <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'account:signup' %}">Sign Up</a> &nbsp;
+    <a class="btn btn-primary my-2 my-sm-0" href="{% url 'login' %}">Log in</a>
+ </form>
+
+{% endif %}
