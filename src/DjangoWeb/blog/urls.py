@@ -18,4 +18,9 @@ urlpatterns = [
         blog.views.BlogPostDetailView.as_view(
             template_name='blog/details.html'),
         name='blogpostdetail'),
+    url('blog/author/list', blog.views.AuthorBlogPostListView.as_view(template_name='blog/author_blog_post_list.html'), name='author_blog_post_list'),
+    url('blog/author/view/(?P<pk>\d+)/', blog.views.AuthorBlogPostView.as_view(template_name='blog/author_blog_post_detail.html'), name='author_blog_post_view'),
+    url('blog/author/new', blog.views.AuthorBlogPostCreate.as_view(template_name='blog/author_blog_post_form.html'), name='author_blog_post_new'),
+    url('blog/author/edit/(?P<pk>\d+)/', blog.views.AuthorBlogPostUpdate.as_view(template_name='blog/author_blog_post_form.html'), name='author_blog_post_edit'),
+    url('blog/author/delete/(?P<pk>\d+)/', blog.views.AuthorBlogPostDelete.as_view(template_name='blog/author_blog_post_confirm_delete.html'), name='author_blog_post_delete'),
 ]

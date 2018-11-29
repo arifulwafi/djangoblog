@@ -1,0 +1,34 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h2>My Posts</h2>
+<br/>
+
+
+<table  class="table">
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Published Date</th>
+    <th>View</th>
+    <th>Edit</th>
+    <th>Delete</th>
+    </tr>
+</thead>
+<tbody>
+    {% for blogpost in object_list %}
+    <tr>
+    <td>{{ blogpost.title }}</td>
+    <td>{{ blogpost.pub_date }}</td>
+    <td><a href="{% url "blog:author_blog_post_view" blogpost.id %}">view</a></td>
+    <td><a href="{% url "blog:author_blog_post_edit" blogpost.id %}">edit</a></td>
+    <td><a href="{% url "blog:author_blog_post_delete" blogpost.id %}">delete</a></td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+<a href="{% url "blog:author_blog_post_new" %}">Create New</a>
+
+{% endblock %}

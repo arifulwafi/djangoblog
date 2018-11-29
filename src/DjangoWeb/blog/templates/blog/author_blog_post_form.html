@@ -1,0 +1,15 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h1>Blog Post Edit</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.title }}
+    <br />
+    {{ form.short_description }}
+    {{ form.content }}
+    <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

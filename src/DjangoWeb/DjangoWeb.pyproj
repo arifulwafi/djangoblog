@@ -86,6 +86,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="account\templates\account\signup.html" />
+    <Content Include="blog\templates\blog\author_blog_post_confirm_delete.html" />
+    <Content Include="blog\templates\blog\author_blog_post_detail.html" />
+    <Content Include="blog\templates\blog\author_blog_post_list.html" />
+    <Content Include="blog\templates\blog\author_blog_post_form.html" />
     <Content Include="blog\templates\blog\details.html" />
     <Content Include="blog\templates\blog\index.html" />
     <Content Include="requirements.txt" />

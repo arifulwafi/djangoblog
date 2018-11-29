@@ -18,11 +18,14 @@ class BlogPost(models.Model):
     last_updated_date = models.DateTimeField('date updated')
     isdeleted = models.BooleanField()
 
+    def __str__(self):
+        return self.title
+
     def __unicode__(self):
         return self.title
 
 class Comment(models.Model):
-    blog_post = models.ForeignKey(BlogPost)
+    blog_post = models.ForeignKey(BlogPost, on_delete=models.CASCADE)
     content = models.TextField()
     author = models.CharField(max_length=200, default=None, blank=True, null=True)
     email = models.CharField(max_length=200, default=None, blank=True, null=True)
@@ -32,6 +35,11 @@ class Comment(models.Model):
     created_date = models.DateTimeField('date created')
     last_updated_date = models.DateTimeField('date updated')
     isdeleted = models.BooleanField()
+
+    def __str__(self):
+        if len(self.content) > 50:
+            return self.content[:50] + " ..."
+        self.content
 
     def __unicode__(self):
         return self.content
