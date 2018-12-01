@@ -1,0 +1,1 @@
+E:\DjangoApps\django-blog\djangoblog\src\DjangoWeb\obj\Debug\DjangoWeb.pyproj.CoreCompileInputs.cache
