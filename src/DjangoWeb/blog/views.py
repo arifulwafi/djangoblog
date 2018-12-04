@@ -30,6 +30,7 @@ class BlogPostListView(ListView):
 class BlogPostDetailView(DetailView):
     model = BlogPost
 
+
     def get_context_data(self, **kwargs):
         context = super(BlogPostDetailView, self).get_context_data(**kwargs)
         context['title'] = 'Post Detail'
@@ -38,6 +39,10 @@ class BlogPostDetailView(DetailView):
 
 class AuthorBlogPostListView(ListView):
     model = BlogPost
+    
+    def get_queryset(self):
+        return BlogPost.objects.filter(user_id=self.request.user.id)
+
 
 class AuthorBlogPostView(DetailView):
     model = BlogPost
@@ -51,7 +56,7 @@ class AuthorBlogPostCreate(CreateView):
         form.instance.isdeleted = False
         form.instance.created_date = datetime.now()
         form.instance.last_updated_date = datetime.now()
-
+        form.instance.user_id = self.request.user.id
         return super(AuthorBlogPostCreate,self).form_valid(form)
 
     success_url = reverse_lazy('blog:author_blog_post_list')
