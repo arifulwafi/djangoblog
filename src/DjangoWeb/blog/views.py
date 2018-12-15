@@ -3,6 +3,7 @@ Definition of views.
 """
 
 from blog.models import BlogPost
+from blog.models import Comment
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -29,13 +30,16 @@ class BlogPostListView(ListView):
 
 class BlogPostDetailView(DetailView):
     model = BlogPost
-
+    template_name = 'blog/details.html'
 
     def get_context_data(self, **kwargs):
         context = super(BlogPostDetailView, self).get_context_data(**kwargs)
         context['title'] = 'Post Detail'
         context['year'] = datetime.now().year
         return context
+
+
+
 
 class AuthorBlogPostListView(ListView):
     model = BlogPost
@@ -80,3 +84,19 @@ class AuthorBlogPostUpdate(UpdateView):
 class AuthorBlogPostDelete(DeleteView):
     model = BlogPost
     success_url = reverse_lazy('blog:author_blog_post_list')
+
+
+@login_required()
+def blogComment(request, pk):
+    blog_post = get_object_or_404(BlogPost, pk=pk)
+    new_review = Comment(
+        content=request.POST['content'],
+        status=1,
+        pub_date = datetime.now(),
+        isdeleted = False,
+        created_date = datetime.now(),
+        last_updated_date = datetime.now(),
+        blog_post=blog_post)
+    new_review.save()
+    return HttpResponseRedirect(reverse('blog:blogpostdetail', args=(blog_post.id,)))
+
